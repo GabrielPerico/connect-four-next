@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { twMerge } from "tailwind-merge";
+import { MillionLintProvider } from "@million/lint/runtime";
 
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
@@ -14,15 +15,17 @@ export const metadata: Metadata = {
 const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <html lang="en">
-      <body
-        suppressHydrationWarning
-        className={twMerge(
-          spaceGrotesk.className,
-          "h-svh w-svw overflow-hidden",
-        )}
-      >
-        {children}
-      </body>
+      <MillionLintProvider>
+        <body
+          suppressHydrationWarning
+          className={twMerge(
+            spaceGrotesk.className,
+            "h-svh w-svw overflow-hidden",
+          )}
+        >
+          {children}
+        </body>
+      </MillionLintProvider>
     </html>
   );
 };
